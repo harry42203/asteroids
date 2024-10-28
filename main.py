@@ -13,6 +13,10 @@ def main():
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
+    black = (0,0,0)
+    white = (255, 255, 255)
+    color_text = black
+    color_background = white
     
     # Initialise pygame
     pygame.init()
@@ -56,10 +60,10 @@ def main():
                 return
 
         # Set background to black    
-        screen.fill((0,0,0))
+        screen.fill(color_background)
         if game_over == False:
-            GAME_FONT.render_to(screen, (40, 40), f"High Score: {high_score}", (255, 255, 255))
-            GAME_FONT.render_to(screen, (40, 80), f"Score: {score}", (255, 255, 255))
+            GAME_FONT.render_to(screen, (40, 40), f"High Score: {high_score}", color_text)
+            GAME_FONT.render_to(screen, (40, 80), f"Score: {score}", color_text)
         # iterate through the updateable group and update each object
         for each in updatable:
             each.update(dt)
@@ -84,7 +88,7 @@ def main():
 
         # iterate through the drawable group and update each object
         for item in drawable:
-            item.draw(screen)
+            item.draw(screen,color_text)
 
         # reduce shot cooldown timer
         player.timer  -= dt
@@ -95,9 +99,9 @@ def main():
             for asteroid in asteroids:
                 asteroid.kill()
             player.kill()
-            GAME_OVER_FONT.render_to(screen, (320, 250), "Game Over!", (255, 255, 255))
-            GAME_OVER_FONT.render_to(screen, (320, 350), f"High Score: {high_score}", (255, 255, 255))
-            GAME_OVER_FONT.render_to(screen, (320, 450), f"Score: {score}", (255, 255, 255))
+            GAME_OVER_FONT.render_to(screen, (320, 250), "Game Over!", color_text)
+            GAME_OVER_FONT.render_to(screen, (320, 350), f"High Score: {high_score}", color_text)
+            GAME_OVER_FONT.render_to(screen, (320, 450), f"Score: {score}", color_text)
         
         # reset the display
         pygame.display.flip()
