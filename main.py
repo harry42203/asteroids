@@ -75,7 +75,6 @@ def main():
                 if score > int(high_score):
                     with open(savefile, "w") as outfile:
                         outfile.write(str(score))
-               
                 game_over = True
                 break
             
